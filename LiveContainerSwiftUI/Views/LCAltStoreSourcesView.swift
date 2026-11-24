@@ -927,8 +927,8 @@ private struct AltStoreSourceSectionView: View {
                         .fill(Color(uiColor: UIColor.secondarySystemBackground))
                 )
             } else if let source = item.source, isExpanded || isFiltering {
-                VStack(spacing: 12) {
-                    ForEach(filteredApps[0..<min(50, filteredApps.count)]) { app in
+                LazyVStack(spacing: 12) {
+                    ForEach(filteredApps) { app in
                         LCSourceAppBanner(app: app, source: source, installAction: onInstall)
                     }
                     if filteredApps.isEmpty {
@@ -938,11 +938,6 @@ private struct AltStoreSourceSectionView: View {
                                 .foregroundStyle(.secondary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                    } else if filteredApps.count > 50 {
-                        Text("lc.sources.section.tooManyApps".loc)
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             } else if item.isLoading {
